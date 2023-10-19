@@ -3,6 +3,19 @@ from random import randrange
 
 
 class Snake:
+    @property
+    def direction(self):
+        return self._direction
+
+    @direction.setter
+    def direction(self, value):
+        if value != -self._direction:
+            self._direction = value
+
+    @property
+    def range(self):
+        return self._range
+
     def __init__(self, game):
         self.game = game
         self.size = game.TILE_SIZE
@@ -19,19 +32,6 @@ class Snake:
         self.length = 1
         self.segments = []
         self.directions = {pg.K_w: 1, pg.K_s: 1, pg.K_a: 1, pg.K_d: 1}
-
-    @property
-    def direction(self):
-        return self._direction
-
-    @direction.setter
-    def direction(self, value):
-        if value != -self._direction:
-            self._direction = value
-
-    @property
-    def range(self):
-        return self._range
 
     def handle_events(self, event):
         if event.type == pg.KEYDOWN:
