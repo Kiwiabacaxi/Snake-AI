@@ -5,8 +5,8 @@ from collections import namedtuple
 import numpy as np
 
 pygame.init()
-font = pygame.font.Font('arial.ttf', 25)
-#font = pygame.font.SysFont('arial', 25)
+# font = pygame.font.Font('arial.ttf', 25)
+font = pygame.font.SysFont('arial', 25)
 
 class Direction(Enum):
     RIGHT = 1
@@ -28,7 +28,7 @@ SPEED = 100
 
 class SnakeGameAI:
 
-    def __init__(self, w=200, h=200):
+    def __init__(self, w=640, h=640):
         self.w = w
         self.h = h
         # init display
