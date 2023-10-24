@@ -22,6 +22,7 @@ class Agent:
         # IA vai se lembrar de tudo que aconteceu no jogo
         self.memory = deque(maxlen=MAX_MEMORY)  # popleft() # if MAX_MEMORY is reached
         self.model = Linear_QNet(11, 256, 3)  # 11 inputs, 256 hidden layer, 3 outputs
+        # self.model = Linear_QNet(11, 128, 3)  # 11 inputs, 128 hidden layer, 3 outputs
         self.trainer = QTrainer(
             self.model, lr=LR, gamma=self.gamma
         )  # trainer vai treinar o modelo

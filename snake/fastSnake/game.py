@@ -6,7 +6,7 @@ import numpy as np
 
 import torch
 
-# from torch.utils.tensorboard import SummaryWriter
+from torch.utils.tensorboard import SummaryWriter
 
 pygame.init()
 # font = pygame.font.Font('arial.ttf', 25)
@@ -36,6 +36,8 @@ WHITE = (255, 255, 255)
 RED = (200, 0, 0)
 BLUE1 = (0, 0, 255)
 BLUE2 = (0, 100, 255)
+GREEN1 = (0, 255, 0)
+GREEN2 = (100, 255, 100)
 BLACK = (0, 0, 0)
 
 BLOCK_SIZE = 20
@@ -52,7 +54,7 @@ class SnakeGameAI:
         self.h = h
 
         # init log no Tensorboard
-        # self.writer = SummaryWriter("logs")
+        self.writer = SummaryWriter("logs")
 
         # init display do pygame
         self.display = pygame.display.set_mode(
@@ -157,10 +159,10 @@ class SnakeGameAI:
 
         for pt in self.snake:
             pygame.draw.rect(
-                self.display, BLUE1, pygame.Rect(pt.x, pt.y, BLOCK_SIZE, BLOCK_SIZE)
+                self.display, GREEN1, pygame.Rect(pt.x, pt.y, BLOCK_SIZE, BLOCK_SIZE)
             )
             pygame.draw.rect(
-                self.display, BLUE2, pygame.Rect(pt.x + 4, pt.y + 4, 12, 12)
+                self.display, GREEN2, pygame.Rect(pt.x + 4, pt.y + 4, 12, 12)
             )
 
         pygame.draw.rect(
