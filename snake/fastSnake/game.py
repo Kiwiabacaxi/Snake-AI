@@ -5,11 +5,21 @@ from collections import namedtuple
 import numpy as np
 
 import torch
-from torch.utils.tensorboard import SummaryWriter
+
+# from torch.utils.tensorboard import SummaryWriter
 
 pygame.init()
 # font = pygame.font.Font('arial.ttf', 25)
 font = pygame.font.SysFont("arial", 25)
+
+
+# oque tem que alterar do snake_human
+# reset
+# reward
+# play(action) -> direction
+# game_iteration
+# is_collision
+# mandar o codigo pronto *
 
 
 class Direction(Enum):
@@ -29,34 +39,44 @@ BLUE2 = (0, 100, 255)
 BLACK = (0, 0, 0)
 
 BLOCK_SIZE = 20
-SPEED = 100
+SPEED = 200
+
+WIDTH = 400  # 640
+HEIGHT = 400  # 480
 
 
 class SnakeGameAI:
-    def __init__(self, w=640, h=640):
+    def __init__(self, w=WIDTH, h=HEIGHT):
+        # Seta o tamanho da tela
         self.w = w
         self.h = h
 
-        # init log
-        self.writer = SummaryWriter("logs")
+        # init log no Tensorboard
+        # self.writer = SummaryWriter("logs")
 
-        # init display
-        self.display = pygame.display.set_mode((self.w, self.h))
-        pygame.display.set_caption("Snake")
+        # init display do pygame
+        self.display = pygame.display.set_mode(
+            (self.w, self.h)
+        )  # seta o tamanho da tela
+        pygame.display.set_caption("Snake")  # seta o nome da tela
         self.clock = pygame.time.Clock()
         self.reset()
 
     def reset(self):
-        # init game state
-        self.direction = Direction.RIGHT
+        # init estado inicial do jogo
+        self.direction = Direction.RIGHT  # começa indo para a direita
 
+        # cria a cabeça da cobra como um ponto no meio da tela
         self.head = Point(self.w / 2, self.h / 2)
+
+        # cria a cobra com 3 pontos
         self.snake = [
             self.head,
             Point(self.head.x - BLOCK_SIZE, self.head.y),
             Point(self.head.x - (2 * BLOCK_SIZE), self.head.y),
         ]
 
+        # inicia score como 0 e coloca a comida em um lugar aleatório
         self.score = 0
         self.food = None
         self._place_food()
@@ -87,6 +107,7 @@ class SnakeGameAI:
         self.snake.insert(0, self.head)
 
         # 3. check if game over
+        # add reward and frame_iteration
         reward = 0
         game_over = False
         if self.is_collision() or self.frame_iteration > 100 * len(self.snake):

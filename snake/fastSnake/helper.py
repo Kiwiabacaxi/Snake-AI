@@ -1,15 +1,17 @@
 import matplotlib.pyplot as plt
 from IPython import display
 
-plt.ion()
+# mandar pronto
+
+plt.ion()  # ion é para o plot conseguir se atualizar em tempo real
 
 
 def plot(scores, mean_scores):
     display.clear_output(wait=True)
     display.display(plt.gcf())
     plt.clf()
-    # fazer um modelo sem GUI PRA TREINAR MAIS RAPIDO PLMDDS
-    plt.title("Treinando(tada.ED_v2)")
+    # fazer um modelo sem GUI PARA TREINAR MAIS RAPIDO PLMDDS
+    plt.title("Treinando")
     plt.xlabel("Numero de geracoes")
     plt.ylabel("Score")
     plt.plot(scores)
